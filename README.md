@@ -97,7 +97,7 @@ x direction           |  x + y direction
 :-------------------------:|:-------------------------:
 ![alt text](output_images/sobel_x.png) |  ![alt text](output_images/xy.png)
 
-Magnitude + Orientation         |  All four combined 
+Magnitude + Orientation         |  All four combined
 :-------------------------:|:-------------------------:
 ![alt text](output_images/mag_ori.png) |  ![alt text](output_images/all.png)
 
@@ -113,8 +113,12 @@ The following images are genereated from test4.jpg and the threshold is equal to
 
 ![alt text](test_images/test4.jpg "Original image")
 
-![alt text](output_images/color_RGB1.png "R") ![alt text](output_images/color_RGB2.png "G") ![alt text](output_images/color_RGB3.png "B") 
-![alt text](output_images/color_HSV1.png "H") ![alt text](output_images/color_HSV2.png "S") ![alt text](output_images/color_HSV3.png "V")
+R  |  G |  B
+:-------------------------:|:-------------------------:|:-------------------------:
+![alt text](output_images/color_RGB1.png) | ![alt text](output_images/color_RGB2.png "G") | ![alt text](output_images/color_RGB3.png "B") 
+H  |  S |  V
+:-------------------------:|:-------------------------:|:-------------------------:
+![alt text](output_images/color_HSV1.png "H") |![alt text](output_images/color_HSV2.png "S") |![alt text](output_images/color_HSV3.png "V")
 ![alt text](output_images/color_HLS1.png "H") ![alt text](output_images/color_HLS2.png "L") ![alt text](output_images/color_HLS3.png "S")
 
 ![alt text](output_images/color_Lab1.png "L") ![alt text](output_images/color_Lab2.png "a") ![alt text](output_images/color_Lab3.png "b")
