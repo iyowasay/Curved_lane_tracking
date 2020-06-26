@@ -190,8 +190,9 @@ According to the evaluation, the Sobel gradient in x direction is used, along wi
 
 The code is shown in the function `color_thresholding()`.
 
-![alt text][image9] ![alt text][image10] ![alt text][image11]
-![alt text][image12] ![alt text][image13] ![alt text][image14]
+![alt text][image9] | ![alt text][image10]| ![alt text][image11]
+
+![alt text][image12] |![alt text][image13]| ![alt text][image14]
 
 #### 3. Perspective transform
 
@@ -208,9 +209,7 @@ The code is shown in the function `perspective_transform()` and the source and d
 | 760, 460      | 1200, 0       |
 
 
-![alt text][image4] 
-![alt text][image5] 
-![alt text][image6] 
+![alt text][image4]| ![alt text][image5]| ![alt text][image6] 
 
 #### 4. Define a class for lanes
 
@@ -229,7 +228,9 @@ Such as:
 
 1. Calculate the histogram of the warped binary image and find out the maximum of each side. Here the bottom half of the original image is used to identify the peaks. (`histogram()`)
  
-![alt text][image15]
+<p align="center">
+    <img src="output_images/histo.png" width="500" height="250">
+</p>
 
 2. Use this as the starting points of left and right lane.
 3. Set the parameters for sliding windows, namely the window size, margin from the starting points, minimum number of pixels found to recenter window.
@@ -243,14 +244,17 @@ Such as:
 11. Return the unwarped image and visualize the result.(`visualize()`)
 12. A subwindow in the top-right corner is created for the purpose of debugging and visualization. It shows the bird's-eye view of current lane finding process.
 
-<img src="output_images/windows.png" width="200" height="100">
-
+<p align="center">
+    <img src="output_images/windows.png" width="500" height="250">
+</p>
 
 A moving averaging method `ring_buffer()` is used to stablize and smooth the result. This method takes a fixed amount `buffer_size` of buffer of previous lane detection and obtain the average of these values. If the size of current list exceeds the buffer size, then the earliest information will be discarded.
 
 Note that it is inefficient to go through all the windows for every singel frame. An better alternative is to reuse the previous polynomial and search inside a particular range(margin) around the previous line. If no points has been found, then we go back to sliding window search. (`search_around_previous()` and `lane_finding()`) 
 
-<img src="output_images/targeted.png" width="300" height="100">
+<p align="center">
+    <img src="output_images/targeted.png" width="500" height="250">
+</p>
 
 As for the function `sanity_check()`, few examinations are carried out in this part. This ensures that erroneous detections are properly processed and will not affect the overall estimation.
 
@@ -264,6 +268,10 @@ As for the function `sanity_check()`, few examinations are carried out in this p
 
 The code for calculation of the radius of curvature is shown in `curvature()` and it's based on the equation below.  
 
+```math
+R_c=\frac{[1+(\frac{dx}{dy })^2]^{3/2}}{ \left|\frac{ d^2x }{ dy^2 }\right| }
+```
+
 <img src="https://latex.codecogs.com/gif.latex?R_c=\frac{ [1+(\frac{dx}{dy })^2]^{3/2} }{ \left|\frac{ d^2x }{ dy^2 }\right| } " /> 
 
 As for the position of the center of ego car, first calculate the x coordinate of the lane center using the last point of both fitting lines. Then the center position can be determined by the difference between camera center and the lane center and turning it into length in meter.(`get_offset()`)
@@ -272,7 +280,7 @@ As for the position of the center of ego car, first calculate the x coordinate o
 
 #### 7. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-![alt text][image6]
+
 
 ---
 
