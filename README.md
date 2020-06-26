@@ -38,7 +38,7 @@ All the code are presented in Advanced Lane Tracking.ipynb.
 [image14]: output_images/color_HLS3.png "S"
 
 [image15]: output_images/histo.png "Histogram"
-[image16]: output_images/window.png "Sliding window"
+[image16]: output_images/windows.png "Sliding window"
 [image17]: output_images/targeted.png "Targeted search"
 [image18]: output_images/histo.png "Histogram"
 [image19]: output_images/histo.png "Histogram"
@@ -228,7 +228,9 @@ Such as:
 #### 5. Identified lane-line pixels and polynomial fitting
 
 1. Calculate the histogram of the warped binary image and find out the maximum of each side. Here the bottom half of the original image is used to identify the peaks. (`histogram()`)
+ 
 ![alt text][image15]
+
 2. Use this as the starting points of left and right lane.
 3. Set the parameters for sliding windows, namely the window size, margin from the starting points, minimum number of pixels found to recenter window.
 4. Create empty lists to receive left and right lane pixel indices.
@@ -241,13 +243,13 @@ Such as:
 11. Return the unwarped image and visualize the result.(`visualize()`)
 12. A subwindow in the top-right corner is created for the purpose of debugging and visualization. It shows the bird's-eye view of current lane finding process.
 
-![alt text][image16]
+![alt text][image16]{:height="50%" width="50%"}
 
 A moving averaging method `ring_buffer()` is used to stablize and smooth the result. This method takes a fixed amount `buffer_size` of buffer of previous lane detection and obtain the average of these values. If the size of current list exceeds the buffer size, then the earliest information will be discarded.
 
 Note that it is inefficient to go through all the windows for every singel frame. An better alternative is to reuse the previous polynomial and search inside a particular range(margin) around the previous line. If no points has been found, then we go back to sliding window search. (`search_around_previous()` and `lane_finding()`) 
 
-![alt text][image17]
+![alt text][image17]{:height="50%" width="50%"}
 
 As for the function `sanity_check()`, few examinations are carried out in this part. This ensures that erroneous detections are properly processed and will not affect the overall estimation.
 
@@ -261,7 +263,7 @@ As for the function `sanity_check()`, few examinations are carried out in this p
 
 The code for calculation of the radius of curvature is shown in `curvature()` and it's based on the equation below.  
 
-<img src="https://latex.codecogs.com/gif.latex?R_c = \frac{[1+(\frac{dx}{dy})^2]^{3/2}}{\left | \frac{d^2x}{dy^2} \right |} " /> 
+<img src="https://latex.codecogs.com/gif.latex?R_c=\frac{ [1+(\frac{dx}{dy })^2]^{3/2} }{ \left|\frac{ d^2x }{ dy^2 }\right| } " /> 
 
 As for the position of the center of ego car, first calculate the x coordinate of the lane center using the last point of both fitting lines. Then the center position can be determined by the difference between camera center and the lane center and turning it into length in meter.(`get_offset()`)
 
