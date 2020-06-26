@@ -114,10 +114,10 @@ The following images are genereated from test4.jpg and the threshold is equal to
 ![alt text](test_images/test4.jpg "Original image")
 
 R  |  G |  B
-:-------------------------:|:-------------------------:|:-------------------------:
+:---:|:---:|:---:
 ![alt text](output_images/color_RGB1.png) | ![alt text](output_images/color_RGB2.png "G") | ![alt text](output_images/color_RGB3.png "B") 
 H  |  S |  V
-:-------------------------:|:-------------------------:|:-------------------------:
+:---:|:---:|:---:
 ![alt text](output_images/color_HSV1.png "H") |![alt text](output_images/color_HSV2.png "S") |![alt text](output_images/color_HSV3.png "V")
 ![alt text](output_images/color_HLS1.png "H") ![alt text](output_images/color_HLS2.png "L") ![alt text](output_images/color_HLS3.png "S")
 
