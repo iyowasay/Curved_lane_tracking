@@ -243,13 +243,14 @@ Such as:
 11. Return the unwarped image and visualize the result.(`visualize()`)
 12. A subwindow in the top-right corner is created for the purpose of debugging and visualization. It shows the bird's-eye view of current lane finding process.
 
-![alt text|200x60,100%][image16]
+<img src="output_images/windows.png" width="200" height="100">
+
 
 A moving averaging method `ring_buffer()` is used to stablize and smooth the result. This method takes a fixed amount `buffer_size` of buffer of previous lane detection and obtain the average of these values. If the size of current list exceeds the buffer size, then the earliest information will be discarded.
 
 Note that it is inefficient to go through all the windows for every singel frame. An better alternative is to reuse the previous polynomial and search inside a particular range(margin) around the previous line. If no points has been found, then we go back to sliding window search. (`search_around_previous()` and `lane_finding()`) 
 
-![alt text|512x397,20%][image17]
+<img src="output_images/targeted.png" width="300" height="100">
 
 As for the function `sanity_check()`, few examinations are carried out in this part. This ensures that erroneous detections are properly processed and will not affect the overall estimation.
 
