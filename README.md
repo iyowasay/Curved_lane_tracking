@@ -83,11 +83,11 @@ The following images are generated from test4.jpg.
 
 Sobel in x direction            |  Sobel in y direction
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/sobel_x.png' |  ![alt text]'output_images/sobel_y.png'
+![alt text]('output_images/sobel_x.png') |  ![alt text]('output_images/sobel_y.png')
 
 Magnitude of Sobel         |  Orientation of Sobel 
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/sobel_mag.png' |  ![alt text]'output_images/sobel_dir.png'
+![alt text]('output_images/sobel_mag.png') |  ![alt text]('output_images/sobel_dir.png')
 
 In order to find out the best case for gradient thresholding, I plot the combined binary image of few cases. Y direction contain horizontal lines, which would be seen as noisy when fitting the lane. As for x direction, it is less noisy than the case of magnitude and orientation. Besides, the detected lines are more consistent in this case, which is reasonable since lane lines are close to vertical lines while viewing from the driver's position. Therefore, I decided to use Sobel operator in only x direction. 
 
@@ -95,11 +95,11 @@ Comparison:
 
 x direction           |  x + y direction
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/sobel_x.png' |  ![alt text]'output_images/xy.png'
+![alt text]('output_images/sobel_x.png') |  ![alt text]('output_images/xy.png')
 
 Magnitude + Orientation         |  All four combined 
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/mag_ori.png' |  ![alt text]'output_images/all.png'
+![alt text]('output_images/mag_ori.png') |  ![alt text]('output_images/all.png')
 
 #### Color space
 
@@ -111,19 +111,19 @@ The result shows that not every channel is able to detect lanes due to the prope
 
 The following images are genereated from test4.jpg and the threshold is equal to (170, 255).
 
-![alt text] 'test_images/test4.jpg' "Original image"
+![alt text]('test_images/test4.jpg' "Original image")
 
-![alt text] 'output_images/color_RGB1.png' "R" ![alt text]'output_images/color_RGB2.png' "G" ![alt text]'output_images/color_RGB3.png' "B" 
-![alt text] 'output_images/color_HSV1.png' "H" ![alt text]'output_images/color_HSV2.png' "S" ![alt text]'output_images/color_HSV3.png' "V"
-![alt text] 'output_images/color_HLS1.png' "H" ![alt text]'output_images/color_HLS2.png' "L" ![alt text]'output_images/color_HLS3.png' "S"
+![alt text]('output_images/color_RGB1.png' "R") ![alt text]('output_images/color_RGB2.png' "G") ![alt text]('output_images/color_RGB3.png' "B") 
+![alt text]('output_images/color_HSV1.png' "H") ![alt text]('output_images/color_HSV2.png' "S") ![alt text]('output_images/color_HSV3.png' "V")
+![alt text]('output_images/color_HLS1.png' "H") ![alt text]('output_images/color_HLS2.png' "L") ![alt text]'output_images/color_HLS3.png' "S"
 
-![alt text] 'output_images/color_Lab1.png' "L" ![alt text]'output_images/color_Lab2.png' "a" ![alt text]'output_images/color_Lab3.png' "b"
+![alt text]('output_images/color_Lab1.png' "L") ![alt text]('output_images/color_Lab2.png' "a") ![alt text]('output_images/color_Lab3.png' "b")
 
-![alt text] 'output_images/color_Luv1.png' "L" ![alt text]'output_images/color_Luv2.png' "u" ![alt text]'output_images/color_Luv3.png' "v"
+![alt text]('output_images/color_Luv1.png' "L") ![alt text]('output_images/color_Luv2.png' "u") ![alt text]('output_images/color_Luv3.png' "v")
 
-![alt text] 'output_images/color_YUV1.png' "Y" ![alt text]'output_images/color_YUV2.png' "U" ![alt text]'output_images/color_YUV3.png' "V"
+![alt text]('output_images/color_YUV1.png' "Y") ![alt text]('output_images/color_YUV2.png' "U") ![alt text]('output_images/color_YUV3.png' "V")
 
-![alt text] 'output_images/color_YCrCb1.png' "Y" ![alt text]'output_images/color_YCrCb2.png' "Cr" ![alt text]'output_images/color_YCrCb3.png' "Cb"
+![alt text]('output_images/color_YCrCb1.png' "Y") ![alt text]('output_images/color_YCrCb2.png' "Cr") ![alt text]('output_images/color_YCrCb3.png' "Cb")
 
 
 
@@ -136,22 +136,22 @@ The region of interest(ROI) is set to the region around the current staying lane
 
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/test_roi2.png' |  ![alt text]'output_images/test_un2.png'
+![alt text]('output_images/test_roi2.png') |  ![alt text]('output_images/test_un2.png')
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/test_roi3.png' |  ![alt text]'output_images/test_un3.png'
+![alt text]('output_images/test_roi3.png') |  ![alt text]('output_images/test_un3.png')
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/test_roi4.png' |  ![alt text]'output_images/test_un4.png'
+![alt text]('output_images/test_roi4.png') |  ![alt text]('output_images/test_un4.png')
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/test_roi5.png' |  ![alt text]'output_images/test_un5.png'
+![alt text]('output_images/test_roi5.png') |  ![alt text]('output_images/test_un5.png')
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/test_roi6.png' |  ![alt text]'output_images/test_un6.png'
+![alt text]('output_images/test_roi6.png') |  ![alt text]('output_images/test_un6.png')
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] 'output_images/test_roi7.png' |  ![alt text]'output_images/test_un7.png'
+![alt text]('output_images/test_roi7.png') |  ![alt text]('output_images/test_un7.png')
 
 
 
