@@ -115,19 +115,23 @@ The following images are genereated from test4.jpg and the threshold is equal to
 
 R  |  G |  B
 :---:|:---:|:---:
-![alt text](output_images/color_RGB1.png) | ![alt text](output_images/color_RGB2.png "G") | ![alt text](output_images/color_RGB3.png "B") 
+![alt text](output_images/color_RGB1.png)| ![alt text](output_images/color_RGB2.png "G")| ![alt text](output_images/color_RGB3.png "B") 
+
+<!-- ![alt text](output_images/color_HSV1.png "H") |![alt text](output_images/color_HSV2.png "S") |![alt text](output_images/color_HSV3.png "V") -->
+
 H  |  S |  V
-:---:|:---:|:---:
-![alt text](output_images/color_HSV1.png "H") |![alt text](output_images/color_HSV2.png "S") |![alt text](output_images/color_HSV3.png "V")
-![alt text](output_images/color_HLS1.png "H") ![alt text](output_images/color_HLS2.png "L") ![alt text](output_images/color_HLS3.png "S")
+:-----:|:-----:|:-----:
+![alt text](output_images/color_HLS1.png "H")| ![alt text](output_images/color_HLS2.png "L")| ![alt text](output_images/color_HLS3.png "S")
 
-![alt text](output_images/color_Lab1.png "L") ![alt text](output_images/color_Lab2.png "a") ![alt text](output_images/color_Lab3.png "b")
+L | a | b
+:--------:|:--------:|:--------:
+![alt text](output_images/color_Lab1.png "L")| ![alt text](output_images/color_Lab2.png "a")| ![alt text](output_images/color_Lab3.png "b")
 
-![alt text](output_images/color_Luv1.png "L") ![alt text](output_images/color_Luv2.png "u") ![alt text](output_images/color_Luv3.png "v")
+<!-- ![alt text](output_images/color_Luv1.png "L") ![alt text](output_images/color_Luv2.png "u") ![alt text](output_images/color_Luv3.png "v")
 
 ![alt text](output_images/color_YUV1.png "Y") ![alt text](output_images/color_YUV2.png "U") ![alt text](output_images/color_YUV3.png "V")
 
-![alt text](output_images/color_YCrCb1.png "Y") ![alt text](output_images/color_YCrCb2.png "Cr") ![alt text](output_images/color_YCrCb3.png "Cb")
+![alt text](output_images/color_YCrCb1.png "Y") ![alt text](output_images/color_YCrCb2.png "Cr") ![alt text](output_images/color_YCrCb3.png "Cb") -->
 
 
 
@@ -136,26 +140,29 @@ H  |  S |  V
 The region of interest(ROI) is set to the region around the current staying lane. This is also related to the coordinate of source point for the perspective transform. 
 
 
-![alt text]
+Original image with ROI            |  Undistorted image
+:-------------------------:|:-------------------------:
+![alt text](output_images/test_roi2.png) |  ![alt text](output_images/test_un2.jpg)
 
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text](output_images/test_roi2.png) |  ![alt text](output_images/test_un2.png)
+![alt text](output_images/test_roi3.png) |  ![alt text](output_images/test_un3.jpg)
+
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text](output_images/test_roi3.png) |  ![alt text](output_images/test_un3.png)
+![alt text](output_images/test_roi4.png) |  ![alt text](output_images/test_un4.jpg)
+
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text](output_images/test_roi4.png) |  ![alt text](output_images/test_un4.png)
+![alt text](output_images/test_roi5.png) |  ![alt text](output_images/test_un5.jpg)
+
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text](output_images/test_roi5.png) |  ![alt text](output_images/test_un5.png)
+![alt text](output_images/test_roi6.png) |  ![alt text](output_images/test_un6.jpg)
+
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text](output_images/test_roi6.png) |  ![alt text](output_images/test_un6.png)
-Original image with ROI            |  Undistorted image
-:-------------------------:|:-------------------------:
-![alt text](output_images/test_roi7.png) |  ![alt text](output_images/test_un7.png)
+![alt text](output_images/test_roi7.png) |  ![alt text](output_images/test_un7.jpg)
 
 
 
