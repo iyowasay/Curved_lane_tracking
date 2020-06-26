@@ -21,31 +21,31 @@ All the code are presented in Advanced Lane Tracking.ipynb.
 
 [//]: # (Image References)
 
-[image1]: ../output_images/undistorted5.png "Undistorted"
-[image2]: ../camera_cal/calibration5.jpg "Original image"
-[image3]: ../test_images/test3.jpg "test3"
-[image4]: ../output_images/pers1.png "Original image"
-[image5]: ../output_images/pers2.png "Top-down view"
-[image6]: ../output_images/only_s.png "Only S ch."
-[image7]: ../output_images/test_roi2.png 
-[image8]: ../output_images/test_un2.jpg 
+[image1]: output_images/undistorted5.png "Undistorted"
+[image2]: camera_cal/calibration5.jpg "Original image"
+[image3]: test_images/test3.jpg "test3"
+[image4]: output_images/pers1.png "Original image"
+[image5]: output_images/pers2.png "Top-down view"
+[image6]: output_images/only_s.png "Only S ch."
+[image7]: output_images/test_roi2.png 
+[image8]: output_images/test_un2.jpg 
 
-[image9]: ../output_images/color_RGB1.png "R"
-[image10]: ../output_images/color_RGB2.png "G"
-[image11]: ../output_images/color_RGB3.png "B"
-[image12]: ../output_images/color_HLS1.png "H"
-[image13]: ../output_images/color_HLS2.png "L"
-[image14]: ../output_images/color_HLS3.png "S"
+[image9]: output_images/color_RGB1.png "R"
+[image10]: output_images/color_RGB2.png "G"
+[image11]: output_images/color_RGB3.png "B"
+[image12]: output_images/color_HLS1.png "H"
+[image13]: output_images/color_HLS2.png "L"
+[image14]: output_images/color_HLS3.png "S"
 
-[image15]: ../output_images/histo.png "Histogram"
-[image16]: ../output_images/window.png "Sliding window"
-[image17]: ../output_images/targeted.png "Targeted search"
-[image18]: ../output_images/histo.png "Histogram"
-[image19]: ../output_images/histo.png "Histogram"
-[image20]: ../output_images/histo.png "Histogram"
-[image21]: ../output_images/histo.png "Histogram"
+[image15]: output_images/histo.png "Histogram"
+[image16]: output_images/window.png "Sliding window"
+[image17]: output_images/targeted.png "Targeted search"
+[image18]: output_images/histo.png "Histogram"
+[image19]: output_images/histo.png "Histogram"
+[image20]: output_images/histo.png "Histogram"
+[image21]: output_images/histo.png "Histogram"
 
-[image22]: ./examples/example_output.jpg "Output"
+<!-- [image22]: ./examples/example_output.jpg "Output" -->
 
 [video1]: ./project_video.mp4 "Video"
 
@@ -83,11 +83,11 @@ The following images are generated from test4.jpg.
 
 Sobel in x direction            |  Sobel in y direction
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/sobel_x.png' |  ![alt text]'../output_images/sobel_y.png'
+![alt text] 'output_images/sobel_x.png' |  ![alt text]'output_images/sobel_y.png'
 
 Magnitude of Sobel         |  Orientation of Sobel 
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/sobel_mag.png' |  ![alt text]'../output_images/sobel_dir.png'
+![alt text] 'output_images/sobel_mag.png' |  ![alt text]'output_images/sobel_dir.png'
 
 In order to find out the best case for gradient thresholding, I plot the combined binary image of few cases. Y direction contain horizontal lines, which would be seen as noisy when fitting the lane. As for x direction, it is less noisy than the case of magnitude and orientation. Besides, the detected lines are more consistent in this case, which is reasonable since lane lines are close to vertical lines while viewing from the driver's position. Therefore, I decided to use Sobel operator in only x direction. 
 
@@ -95,11 +95,11 @@ Comparison:
 
 x direction           |  x + y direction
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/sobel_x.png' |  ![alt text]'../output_images/xy.png'
+![alt text] 'output_images/sobel_x.png' |  ![alt text]'output_images/xy.png'
 
 Magnitude + Orientation         |  All four combined 
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/mag_ori.png' |  ![alt text]'../output_images/all.png'
+![alt text] 'output_images/mag_ori.png' |  ![alt text]'output_images/all.png'
 
 #### Color space
 
@@ -111,19 +111,19 @@ The result shows that not every channel is able to detect lanes due to the prope
 
 The following images are genereated from test4.jpg and the threshold is equal to (170, 255).
 
-![alt text] '../test_images/test4.jpg' "Original image"
+![alt text] 'test_images/test4.jpg' "Original image"
 
-![alt text] '../output_images/color_RGB1.png' "R" ![alt text]'../output_images/color_RGB2.png' "G" ![alt text]'../output_images/color_RGB3.png' "B" 
-![alt text] '../output_images/color_HSV1.png' "H" ![alt text]'../output_images/color_HSV2.png' "S" ![alt text]'../output_images/color_HSV3.png' "V"
-![alt text] '../output_images/color_HLS1.png' "H" ![alt text]'../output_images/color_HLS2.png' "L" ![alt text]'../output_images/color_HLS3.png' "S"
+![alt text] 'output_images/color_RGB1.png' "R" ![alt text]'output_images/color_RGB2.png' "G" ![alt text]'output_images/color_RGB3.png' "B" 
+![alt text] 'output_images/color_HSV1.png' "H" ![alt text]'output_images/color_HSV2.png' "S" ![alt text]'output_images/color_HSV3.png' "V"
+![alt text] 'output_images/color_HLS1.png' "H" ![alt text]'output_images/color_HLS2.png' "L" ![alt text]'output_images/color_HLS3.png' "S"
 
-![alt text] '../output_images/color_Lab1.png' "L" ![alt text]'../output_images/color_Lab2.png' "a" ![alt text]'../output_images/color_Lab3.png' "b"
+![alt text] 'output_images/color_Lab1.png' "L" ![alt text]'output_images/color_Lab2.png' "a" ![alt text]'output_images/color_Lab3.png' "b"
 
-![alt text] '../output_images/color_Luv1.png' "L" ![alt text]'../output_images/color_Luv2.png' "u" ![alt text]'../output_images/color_Luv3.png' "v"
+![alt text] 'output_images/color_Luv1.png' "L" ![alt text]'output_images/color_Luv2.png' "u" ![alt text]'output_images/color_Luv3.png' "v"
 
-![alt text] '../output_images/color_YUV1.png' "Y" ![alt text]'../output_images/color_YUV2.png' "U" ![alt text]'../output_images/color_YUV3.png' "V"
+![alt text] 'output_images/color_YUV1.png' "Y" ![alt text]'output_images/color_YUV2.png' "U" ![alt text]'output_images/color_YUV3.png' "V"
 
-![alt text] '../output_images/color_YCrCb1.png' "Y" ![alt text]'../output_images/color_YCrCb2.png' "Cr" ![alt text]'../output_images/color_YCrCb3.png' "Cb"
+![alt text] 'output_images/color_YCrCb1.png' "Y" ![alt text]'output_images/color_YCrCb2.png' "Cr" ![alt text]'output_images/color_YCrCb3.png' "Cb"
 
 
 
@@ -136,22 +136,22 @@ The region of interest(ROI) is set to the region around the current staying lane
 
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/test_roi2.png' |  ![alt text]'../output_images/test_un2.png'
+![alt text] 'output_images/test_roi2.png' |  ![alt text]'output_images/test_un2.png'
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/test_roi3.png' |  ![alt text]'../output_images/test_un3.png'
+![alt text] 'output_images/test_roi3.png' |  ![alt text]'output_images/test_un3.png'
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/test_roi4.png' |  ![alt text]'../output_images/test_un4.png'
+![alt text] 'output_images/test_roi4.png' |  ![alt text]'output_images/test_un4.png'
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/test_roi5.png' |  ![alt text]'../output_images/test_un5.png'
+![alt text] 'output_images/test_roi5.png' |  ![alt text]'output_images/test_un5.png'
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/test_roi6.png' |  ![alt text]'../output_images/test_un6.png'
+![alt text] 'output_images/test_roi6.png' |  ![alt text]'output_images/test_un6.png'
 Original image with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
-![alt text] '../output_images/test_roi7.png' |  ![alt text]'../output_images/test_un7.png'
+![alt text] 'output_images/test_roi7.png' |  ![alt text]'output_images/test_un7.png'
 
 
 
