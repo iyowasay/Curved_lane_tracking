@@ -119,7 +119,7 @@ R  |  G |  B
 
 <!-- ![alt text](output_images/color_HSV1.png "H") |![alt text](output_images/color_HSV2.png "S") |![alt text](output_images/color_HSV3.png "V") -->
 
-H  |  S |  V
+H  |  L |  S
 :-----:|:-----:|:-----:
 ![alt text](output_images/color_HLS1.png "H")| ![alt text](output_images/color_HLS2.png "L")| ![alt text](output_images/color_HLS3.png "S")
 
@@ -170,7 +170,7 @@ Original image with ROI            |  Undistorted image
 
 The code is presented in the function `pipeline()` and here we use test.jpg as an example.
 
-![alt text] [image3]
+![alt text][image3]
 
 #### 1. Obtain undistorted image
 
@@ -190,9 +190,10 @@ According to the evaluation, the Sobel gradient in x direction is used, along wi
 
 The code is shown in the function `color_thresholding()`.
 
-![alt text][image9] | ![alt text][image10]| ![alt text][image11]
+S of HLS            | R of RGB      |  B of RGB
+:-------------------------:|:-------------------------:|:-------------------------:
+![alt text][image14] | ![alt text][image9]| ![alt text][image11]
 
-![alt text][image12] |![alt text][image13]| ![alt text][image14]
 
 #### 3. Perspective transform
 
@@ -208,7 +209,8 @@ The code is shown in the function `perspective_transform()` and the source and d
 | 1200, 720     | 1200, 720     |
 | 760, 460      | 1200, 0       |
 
-
+Original image             |  Top-down view       |  Only S channel
+:-------------------------:|:-------------------------:|:-------------------------:
 ![alt text][image4]| ![alt text][image5]| ![alt text][image6] 
 
 #### 4. Define a class for lanes
@@ -268,11 +270,9 @@ As for the function `sanity_check()`, few examinations are carried out in this p
 
 The code for calculation of the radius of curvature is shown in `curvature()` and it's based on the equation below.  
 
-```math
-R_c=\frac{[1+(\frac{dx}{dy })^2]^{3/2}}{ \left|\frac{ d^2x }{ dy^2 }\right| }
-```
+<img src="output_images/equa.png" width="200" height="100">
 
-<img src="https://latex.codecogs.com/gif.latex?R_c=\frac{ [1+(\frac{dx}{dy })^2]^{3/2} }{ \left|\frac{ d^2x }{ dy^2 }\right| } " /> 
+<!-- <img src="https://latex.codecogs.com/gif.latex?R_c=\frac{ [1+(\frac{dx}{dy })^2]^{3/2} }{ \left|\frac{ d^2x }{ dy^2 }\right| } " />  -->
 
 As for the position of the center of ego car, first calculate the x coordinate of the lane center using the last point of both fitting lines. Then the center position can be determined by the difference between camera center and the lane center and turning it into length in meter.(`get_offset()`)
 
