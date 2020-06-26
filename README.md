@@ -40,12 +40,6 @@ All the code are presented in Advanced Lane Tracking.ipynb.
 [image15]: output_images/histo.png "Histogram"
 [image16]: output_images/windows.png "Sliding window"
 [image17]: output_images/targeted.png "Targeted search"
-[image18]: output_images/histo.png "Histogram"
-[image19]: output_images/histo.png "Histogram"
-[image20]: output_images/histo.png "Histogram"
-[image21]: output_images/histo.png "Histogram"
-
-<!-- [image22]: ./examples/example_output.jpg "Output" -->
 
 [video1]: ./project_video.mp4 "Video"
 
@@ -127,11 +121,13 @@ L | a | b
 :--------:|:--------:|:--------:
 ![alt text](output_images/color_Lab1.png "L")| ![alt text](output_images/color_Lab2.png "a")| ![alt text](output_images/color_Lab3.png "b")
 
-<!-- ![alt text](output_images/color_Luv1.png "L") ![alt text](output_images/color_Luv2.png "u") ![alt text](output_images/color_Luv3.png "v")
+<!-- ![alt text](output_images/color_Luv1.png "L") ![alt text](output_images/color_Luv2.png "u") ![alt text](output_images/color_Luv3.png "v") -->
 
+Y | U | V
+:--------:|:--------:|:--------:
 ![alt text](output_images/color_YUV1.png "Y") ![alt text](output_images/color_YUV2.png "U") ![alt text](output_images/color_YUV3.png "V")
 
-![alt text](output_images/color_YCrCb1.png "Y") ![alt text](output_images/color_YCrCb2.png "Cr") ![alt text](output_images/color_YCrCb3.png "Cb") -->
+<!-- ![alt text](output_images/color_YCrCb1.png "Y") ![alt text](output_images/color_YCrCb2.png "Cr") ![alt text](output_images/color_YCrCb3.png "Cb") -->
 
 
 
@@ -140,27 +136,27 @@ L | a | b
 The region of interest(ROI) is set to the region around the current staying lane. This is also related to the coordinate of source point for the perspective transform. 
 
 
-Original image with ROI            |  Undistorted image
+test6.jpg with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
 ![alt text](output_images/test_roi2.png) |  ![alt text](output_images/test_un2.jpg)
 
-Original image with ROI            |  Undistorted image
+test5.jpg with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
 ![alt text](output_images/test_roi3.png) |  ![alt text](output_images/test_un3.jpg)
 
-Original image with ROI            |  Undistorted image
+test4.jpg with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
 ![alt text](output_images/test_roi4.png) |  ![alt text](output_images/test_un4.jpg)
 
-Original image with ROI            |  Undistorted image
+test1.jpg with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
 ![alt text](output_images/test_roi5.png) |  ![alt text](output_images/test_un5.jpg)
 
-Original image with ROI            |  Undistorted image
+test3.jpg with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
 ![alt text](output_images/test_roi6.png) |  ![alt text](output_images/test_un6.jpg)
 
-Original image with ROI            |  Undistorted image
+test2.jpg with ROI            |  Undistorted image
 :-------------------------:|:-------------------------:
 ![alt text](output_images/test_roi7.png) |  ![alt text](output_images/test_un7.jpg)
 
@@ -190,8 +186,8 @@ According to the evaluation, the Sobel gradient in x direction is used, along wi
 
 The code is shown in the function `color_thresholding()`.
 
-S of HLS            | R of RGB      |  B of RGB
-:-------------------------:|:-------------------------:|:-------------------------:
+S of HLS            | R of RGB        |  B of RGB
+:------------------:|:------------------:|:------------------:
 ![alt text][image14] | ![alt text][image9]| ![alt text][image11]
 
 
@@ -208,6 +204,7 @@ The code is shown in the function `perspective_transform()` and the source and d
 | 160, 720      | 160, 720      |
 | 1200, 720     | 1200, 720     |
 | 760, 460      | 1200, 0       |
+
 
 Original image             |  Top-down view       |  Only S channel
 :-------------------------:|:-------------------------:|:-------------------------:
@@ -247,7 +244,7 @@ Such as:
 12. A subwindow in the top-right corner is created for the purpose of debugging and visualization. It shows the bird's-eye view of current lane finding process.
 
 <p align="center">
-    <img src="output_images/windows.png" width="500" height="250">
+    <img src="output_images/windows.png" width="500" height="270">
 </p>
 
 A moving averaging method `ring_buffer()` is used to stablize and smooth the result. This method takes a fixed amount `buffer_size` of buffer of previous lane detection and obtain the average of these values. If the size of current list exceeds the buffer size, then the earliest information will be discarded.
@@ -255,7 +252,7 @@ A moving averaging method `ring_buffer()` is used to stablize and smooth the res
 Note that it is inefficient to go through all the windows for every singel frame. An better alternative is to reuse the previous polynomial and search inside a particular range(margin) around the previous line. If no points has been found, then we go back to sliding window search. (`search_around_previous()` and `lane_finding()`) 
 
 <p align="center">
-    <img src="output_images/targeted.png" width="500" height="250">
+    <img src="output_images/targeted.png" width="500" height="270">
 </p>
 
 As for the function `sanity_check()`, few examinations are carried out in this part. This ensures that erroneous detections are properly processed and will not affect the overall estimation.
@@ -265,12 +262,11 @@ As for the function `sanity_check()`, few examinations are carried out in this p
 3. If the change between current and previous detection is large, 
 
 
-
 #### 6. Radius of curvature and the position of the vehicle with respect to center
 
 The code for calculation of the radius of curvature is shown in `curvature()` and it's based on the equation below.  
 
-<img src="output_images/equa.png" width="200" height="100">
+<img src="output_images/equa.png" width="300" height="100">
 
 <!-- <img src="https://latex.codecogs.com/gif.latex?R_c=\frac{ [1+(\frac{dx}{dy })^2]^{3/2} }{ \left|\frac{ d^2x }{ dy^2 }\right| } " />  -->
 
@@ -294,13 +290,32 @@ Here's a [link to my video result](./project_video.mp4)
 
 ### Discussion
 
-1. Sharp change of curvature
+1. Sharp change of curvature:
+
+The current model are not able to follow very small radius of curvature. This is why the output of harder_challenge_video.mp4 shows really bad result. When it comes to roads with large curves, the sliding window search is unable to change or recenter the window, due to the lack of discovered points(< minpix). This will result in continuous stacking of window, and thus incorrect fitting. In addition, this scenario might need higher order polynomial to capture more complicated lane shape. 
 
 2. Rapid change of brightness
 
+From the video, the brightness of sun light changes rapidly. This is closely related to the choice of color thresholding. The S channel from HLS is discovered by trying the binary images of all different channels. Perhaps a more systematic way of finding the best color space can be created, for example a GUI with items and trackbars 
+
 3. Time complexity
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further. 
+By using `moviepy.editor.VideoFileClip()`, the compile time for project_video.mp4 is around 6 minutes. This 
+Since this application aims to be used in real-time, more efficient methods or algorithms need to be implemented to
 
-When it comes to roads with large curves, the sliding window search is unable to change or recenter the window, due to the lack of discovered points(< minpix). This will result in continuous stacking of window, and thus incorrect fitting. 
+Multithreaded programming
+
+4. Dynamic parameters
+
+All the parameters in the model are fixed during runtime, for instance the type of color space, searching margins, region of interest.  
+
+5. Integration with deep learning 
+
+The 
+
+6. 
+
+
+
+ 
 
