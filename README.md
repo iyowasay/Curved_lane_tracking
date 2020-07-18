@@ -13,7 +13,7 @@ The steps of this project are the following:
 * Use color transforms, gradients, etc., to create a thresholded binary image.
 * Apply a perspective transform to rectify binary image ("birds-eye view").
 * Detect lane pixels and fit to find the lane boundary.
-* Determine the curvature of the lane and vehicle position with respect to center.
+* Determine the curvature of the lane and vehicle position with respect to lane center.
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
@@ -23,7 +23,7 @@ All the code are presented in Advanced Lane Tracking.ipynb.
 
 [image1]: output_images/undistorted5.png "Undistorted"
 [image2]: camera_cal/calibration5.jpg "Original image"
-[image3]: test_images/test3.jpg "test3"
+[image3]: test_images/test4.jpg "test4"
 [image4]: output_images/pers1.png "Original image"
 [image5]: output_images/pers2.png "Top-down view"
 [image6]: output_images/only_s.png "Only S ch."
@@ -47,11 +47,11 @@ All the code are presented in Advanced Lane Tracking.ipynb.
 
 ### Camera Calibration
 
-The transformation from 3D object to 2D image plane isn't perfect, due to the distortion from lenses and different camera configurations. Therefore, camera calibration is necessary in order to obtain actual object data. Most common target for camera calibration is chessboard.
+The transformation from 3D object to 2D image plane isn't perfect, due to the distortion from lenses and different camera configurations. Therefore, camera calibration is necessary in order to obtain actual object information. Most common target for camera calibration is chessboard.
 
 1. Load all the pictures of the chessboard taken by the same camera(preferably from different angles). 
 2. Define two lists for image points(2D) and object points(3D). The object points are the (x, y, z) coordinates of the chessboard corners in the world, which should be the same for all images. Here we assume that the all the points on the chessboard lie in x, y plane hence z = 0.
-3. For each image, turn into grayscale and run `cv2.findChessboardCorners()` to get the corners. 
+3. For each image, turn it into grayscale and run `cv2.findChessboardCorners()` to get the corners. 
 4. If the corners are found, store them in the list of image points. 
 5. Pass these two lists into `cv2.calibrateCamera()` and get the intended coefficients. 
 
@@ -66,11 +66,11 @@ Original image             |  Undistorted image
 
 ### Evaluation and testing
 
-In order to select better combination, a set of functions are created and comparison between different methods or approaches is discussed in this section. The function `plot_compare()` is intended to plot the result and original image side by side, thereby easily visualizign the difference. This helps to determine which type of color and gradient thresholding give better result.
+In order to select better combination, a set of functions are created and comparison between different methods or approaches is discussed in this section. The function `plot_compare()` is intended to plot the result and original image side by side, thereby easily visualizing the difference. This helps to determine which type of color space and gradient thresholding give better result.
 
 #### Sobel operator 
 
-Sobel operator is used for edge detection(the input of Canny detection is simply the output of Sobel operator). First `cv2.Sobel()` is used to calculate the gradient in x and y direction. Then the magnitude and orientation of the gradient can be determined by simple trigonometry. Put these outputs into thresholding function and we can acquire the binary images.
+Sobel operator is used for edge detection(the input of Canny detection is simply the output of Sobel operator). First `cv2.Sobel()` is used to calculate the gradient in x or y direction. Then the magnitude and orientation of the gradient can be determined by simple trigonometry. Put these outputs into thresholding function and we can acquire the binary images.
 
 The code is shown in the functions `sobel_magnitude()`, `sobel_direction()`, and `sobel_xy()`.
 The following images are generated from test4.jpg.
@@ -125,7 +125,7 @@ L | a | b
 
 Y | U | V
 :--------:|:--------:|:--------:
-![alt text](output_images/color_YUV1.png "Y") ![alt text](output_images/color_YUV2.png "U") ![alt text](output_images/color_YUV3.png "V")
+![alt text](output_images/color_YUV1.png "Y")| ![alt text](output_images/color_YUV2.png "U")| ![alt text](output_images/color_YUV3.png "V")
 
 <!-- ![alt text](output_images/color_YCrCb1.png "Y") ![alt text](output_images/color_YCrCb2.png "Cr") ![alt text](output_images/color_YCrCb3.png "Cb") -->
 
@@ -133,7 +133,7 @@ Y | U | V
 
 #### Regoin of interest
 
-The region of interest(ROI) is set to the region around the current staying lane. This is also related to the coordinate of source point for the perspective transform. 
+The region of interest(ROI) is set to the region around the current driving lane. This is also related to the coordinate of source point for the perspective transform. 
 
 
 test6.jpg with ROI            |  Undistorted image
@@ -180,9 +180,9 @@ Original image             |  Undistorted image
 
 #### 2. Color transform and gradient thresholding
 
-A combination of color and gradient thresholds is used to generate a binary image. From the plots, it is evident that the S channel from HLS is relatively stable. However, the tree shaddow in test5.jpg also affect the performance. This can be addressed by including other color spaces. Therefore, the selected color transform are S channel from HLS and B channel from RGB with a threshold of (170, 255).
+A combination of color and gradient thresholds is used to generate a binary image. From the plots, it is evident that the S channel from HLS is relatively stable. However, the tree shadow in test5.jpg also affect the performance. This can be addressed by including other color spaces. Therefore, the selected color transform are S channel from HLS and B channel from RGB with a threshold of (170, 255).
 
-According to the evaluation, the Sobel gradient in x direction is used, along with a threshold of (25, 150). The lower bound(minimum of threshold) should not be too large, otherwise we won't acuiqre enough data points to detect the lanes. The combined binary image will be the input of the next step. 
+According to the evaluation, the Sobel gradient in x direction, with a threshold of (25, 150), is used. The lower bound(minimum of threshold) should not be too large, otherwise we are not able to acquire enough data points to detect the lanes. The combined binary image will be the input of the next step. 
 
 The code is shown in the function `color_thresholding()`.
 
@@ -193,7 +193,7 @@ S of HLS            | R of RGB        |  B of RGB
 
 #### 3. Perspective transform
 
-Perspective transform allows us to transform the camera view point into bird's-eye view. First obtain the grayscale image. Here I made the function more general so that it can accept both colored and binary images as input. Then use cv2.getPerspectiveTransform() to get the transform matrix. The inverse of transform matrix can be determined by switching the order of source and destination points. Finally, use `cv2.warpPerspective()` to generate a warped image.
+Perspective transform allows us to transform the camera view point into bird's-eye view. First obtain the grayscale image. Here I made the function more general so that it can accept both colored and binary images as input. Then use `cv2.getPerspectiveTransform()` to get the transform matrix. The inverse of transform matrix can be determined by switching the order of source and destination points. Finally, use `cv2.warpPerspective()` to generate a warped image.
 
 The code is shown in the function `perspective_transform()` and the source and destination points are shown in the following table. Note that we can decide the points for these two input. This will affect the performance of lane detection. 
 
@@ -223,7 +223,7 @@ Such as:
 
 
 
-#### 5. Identified lane-line pixels and polynomial fitting
+#### 5. Identify lane-line pixels and polynomial fitting
 
 1. Calculate the histogram of the warped binary image and find out the maximum of each side. Here the bottom half of the original image is used to identify the peaks. (`histogram()`)
  
@@ -232,16 +232,16 @@ Such as:
 </p>
 
 2. Use this as the starting points of left and right lane.
-3. Set the parameters for sliding windows, namely the window size, margin from the starting points, minimum number of pixels found to recenter window.
+3. Set the parameters for sliding windows, namely the window size, margin from the starting points, minimum number of pixels found to decide the need of recentering window.
 4. Create empty lists to receive left and right lane pixel indices.
 5. Loop through all the window, define and draw the boundaries of each window. (`sliding_window()`)
-6. Search for those activated pixels(white points) that fall into the window.
-7. Store the indices of these points in the lists. If the number of discovered points is larger than minpix, recenter the starting points. 
+6. Search for those activated pixels(white points) that fall inside the windows.
+7. Store the indices of these points in the lists. If the number of discovered points is larger than `minpix`, recenter the starting points of next window. 
 8. Return the pixel coordinate of all these discovered points.
 9. Use `np.polyfit()` to get the coefficients of the best-fit second-order polynomial. (`poly_fitting()`)
-10. Execute `ring_buffer()` to perform sanity check, add current detection to the averaging list and calculate the average.
+10. Execute `ring_buffer()` to perform sanity check, add current detection to the buffer list and calculate the average.
 11. Return the unwarped image and visualize the result.(`visualize()`)
-12. A subwindow in the top-right corner is created for the purpose of debugging and visualization. It shows the bird's-eye view of current lane finding process.
+12. A subwindow in the top-right corner is created for the purpose of debugging and visualization. It shows the bird's-eye view of detected points of instant lane finding process.
 
 <p align="center">
     <img src="output_images/windows.png" width="500" height="270">
@@ -249,7 +249,7 @@ Such as:
 
 A moving averaging method `ring_buffer()` is used to stablize and smooth the result. This method takes a fixed amount `buffer_size` of buffer of previous lane detection and obtain the average of these values. If the size of current list exceeds the buffer size, then the earliest information will be discarded.
 
-Note that it is inefficient to go through all the windows for every singel frame. An better alternative is to reuse the previous polynomial and search inside a particular range(margin) around the previous line. If no points has been found, then we go back to sliding window search. (`search_around_previous()` and `lane_finding()`) 
+Note that it is inefficient to go through all the windows for every singel frame. A better alternative is to reuse the previous polynomial and search inside a particular range(margin) around the previous line. If no points has been found, then we go back to sliding window search. (`search_around_previous()` and `lane_finding()`) 
 
 <p align="center">
     <img src="output_images/targeted.png" width="500" height="270">
@@ -258,8 +258,9 @@ Note that it is inefficient to go through all the windows for every singel frame
 As for the function `sanity_check()`, few examinations are carried out in this part. This ensures that erroneous detections are properly processed and will not affect the overall estimation.
 
 1. If the distance between right and left lane line is too small or even negative-valued, then go back to sliding window search.
-2. If the radius of curvature is smaller than the minimum or larger than the maximum, this detection is viewed as noisy and thus is discarded. 
-3. If the change between current and previous detection is large, 
+2. If the radius of curvature is smaller than a minimum or larger than a maximum, this detection is viewed as noisy and thus is discarded. 
+3. Check the smallest horizontal distance between left and right fitting lines, it should be close to the lane width 3.7 meters. 
+4. If the change of curvature between current and previous detection is large, this might be a wrong detection hence should be discarded.  
 
 
 #### 6. Radius of curvature and the position of the vehicle with respect to center
@@ -272,19 +273,24 @@ The code for calculation of the radius of curvature is shown in `curvature()` an
 
 As for the position of the center of ego car, first calculate the x coordinate of the lane center using the last point of both fitting lines. Then the center position can be determined by the difference between camera center and the lane center and turning it into length in meter.(`get_offset()`)
 
-
-
-#### 7. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
-
-
-
 ---
 
 ### Pipeline (video)
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here are the processed videos of three original files.
+
+project_video.mp4:
+[![Alternate Text](output_images/v1.png)](https://www.youtube.com/watch?v=dCzfIsL5xIc "project")
+
+
+challenge_video.mp4:
+[![Alternate Text](output_images/v2.png)](https://youtu.be/YbmrPIszKJg "challenge")
+
+
+harder_challenge_video.mp4:
+[![Alternate Text](output_images/v3.png)](https://youtu.be/ojnUlD7No90 "harder_challenge")
 
 ---
 
