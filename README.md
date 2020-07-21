@@ -2,7 +2,7 @@
 
 ---
 
-**Main goals**
+**Main objective**
 
 The goal is to detect and track the lane lines in the project video from the front-facing camera on the ego vehicle.
 
@@ -17,18 +17,18 @@ The steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-All the code are presented in Advanced Lane Tracking.ipynb.
+All the code can be found in the file Advanced Lane Tracking.ipynb.
 
 [//]: # (Image References)
 
 [image1]: output_images/undistorted5.png "Undistorted"
 [image2]: camera_cal/calibration5.jpg "Original image"
-[image3]: test_images/test4.jpg "test4"
+[image3]: test_images/test5.jpg "test5"
 [image4]: output_images/pers1.png "Original image"
 [image5]: output_images/pers2.png "Top-down view"
 [image6]: output_images/only_s.png "Only S ch."
-[image7]: output_images/test_roi2.png 
-[image8]: output_images/test_un2.jpg 
+[image7]: output_images/test_roi3.png 
+[image8]: output_images/test_un3.jpg
 
 [image9]: output_images/color_RGB1.png "R"
 [image10]: output_images/color_RGB2.png "G"
@@ -164,7 +164,7 @@ test2.jpg with ROI            |  Undistorted image
 
 ### Pipeline (single image or frame)
 
-The code is presented in the function `pipeline()` and here we use test.jpg as an example.
+The code is presented in the function `pipeline()` and here we use test5.jpg as an example.
 
 ![alt text][image3]
 
@@ -294,33 +294,27 @@ harder_challenge_video.mp4:
 
 ---
 
-### Discussion
+### Reflection and discussion
 
 1. Sharp change of curvature:
 
-The current model are not able to follow very small radius of curvature. This is why the output of harder_challenge_video.mp4 shows really bad result. When it comes to roads with large curves, the sliding window search is unable to change or recenter the window, due to the lack of discovered points(< minpix). This will result in continuous stacking of window, and thus incorrect fitting. In addition, this scenario might need higher order polynomial to capture more complicated lane shape. 
+The current model are not able to follow very small radius of curvature. This is why the output of harder_challenge_video.mp4 shows really bad result. When it comes to roads with large curves, the sliding window search is unable to change or recenter the window, due to the lack of discovered points(< minpix). This will result in continuous stacking of windows, and thus incorrect fitting. In addition, this scenario might need higher order polynomial to capture more complicated lane shape. 
 
 2. Rapid change of brightness
 
-From the video, the brightness of sun light changes rapidly. This is closely related to the choice of color thresholding. The S channel from HLS is discovered by trying the binary images of all different channels. Perhaps a more systematic way of finding the best color space can be created, for example a GUI with items and trackbars 
+In the harder_challenge_video, the brightness of sun light changes rapidly. This is closely related to the choice of color thresholding. The S channel from HLS is discovered by trying the binary images of all different channels. Perhaps a more systematic way of finding the best color space can be created, for example a GUI with items and trackbars 
 
 3. Time complexity
 
-By using `moviepy.editor.VideoFileClip()`, the compile time for project_video.mp4 is around 6 minutes. This 
-Since this application aims to be used in real-time, more efficient methods or algorithms need to be implemented to
-
-Multithreaded programming
+By using `moviepy.editor.VideoFileClip()`, the compile time for project_video.mp4 is around 6 minutes. It's obviously a time-consuming process. Since this application aims to be used in real-time, more efficient methods or algorithms need to be implemented. Perhaps multithread programming can be a solution.
 
 4. Dynamic parameters
 
-All the parameters in the model are fixed during runtime, for instance the type of color space, searching margins, region of interest.  
+All the parameters in the model are fixed during runtime, for instance the type of color space, searching margins, region of interest. This means that the system is unable to react while the scene change rapidly hence it has low flexibility. This can be addressed by incorporating and switching to different combinations of parameters(kinda brute force method) or more powerful algorithms which can adjust the parameters according to the road condition.
 
 5. Integration with deep learning 
 
-The 
-
-6. 
-
+Lane keeping is one of the main application of lane detection. However, the road condition can change drastically. Besides, there might be some situation that no lane lines are there to be detected. Therefore, more robust approaches must be included. I strongly agree with the great idea of George Hotz, currently the president of comma.ai. We should heavily rely on the lane detection. Instead, we could ask the same question everytime we receive a new frame from the camera: where will human being drivers position the vehicle in this scenario? By integrating behavoir cloning or more complex deep learning algorithm, the system will definitely be improved.
 
 
  
